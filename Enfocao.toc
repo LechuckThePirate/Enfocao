@@ -1,0 +1,31 @@
+## Interface: 16001
+## Title: Enfocao!!
+## Notes: Stop planning. Start playing. Your personal WoW coach: set goals (level, professions, reputations, gold, items, quests) and follow them on their own.
+## Notes-esES: Deja de planificar. Ponte a jugar. Tu entrenador personal de WoW: ponte objetivos (nivel, profesiones, reputaciones, oro, objetos, misiones) y síguelos solos.
+## Notes-esMX: Deja de planificar. Ponte a jugar. Tu entrenador personal de WoW: ponte objetivos (nivel, profesiones, reputaciones, oro, objetos, misiones) y síguelos solos.
+## Category: Quests
+## Category-esES: Misiones
+## Category-esMX: Misiones
+## Author: LechuckThePirate
+## Version: 0.1.0
+## X-License: GPL-3.0
+## IconTexture: Interface\AddOns\Enfocao\Icons\Enfocao.png
+## OptionalDeps: BakalaoStudios_DataStore, Completao, Fabrikao
+## SavedVariables: EnfocaoDB
+
+Localization\Locale.lua
+Modules\Core\Util.lua
+Modules\Core\Compat.lua
+Modules\Settings\Settings.lua
+Modules\Data\Character.lua
+Modules\Goals\Types.lua
+Modules\Goals\Goals.lua
+Modules\UI\Widgets.lua
+Modules\UI\Main.lua
+Modules\UI\Goals.lua
+Modules\UI\NewGoal.lua
+Modules\UI\Hud.lua
+Modules\UI\Preferences.lua
+Modules\UI\MinimapButton.lua
+Modules\UI\About.lua
+Enfocao.lua

@@ -1,0 +1,14 @@
+package-as: Enfocao
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+ignore:
+  - images
+  - tools
+  - test
+  - setupTests.lua
+  - "*.test.lua"
+  - .luacheckrc
+# with it, Enfocao knows (and coaches) the other characters of the account; without it, the playing one
+optional-dependencies:
+  - bakalaostudios-datastore
