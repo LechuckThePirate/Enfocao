@@ -31,8 +31,13 @@ local function onEnterWorld()
         if ns.settings.quiet then return end
         local n = #ns.Goals_For(ns.MyKey(), false)
         local text = n == 0 and L["no goals yet: /enfocao new"] or (n == 1 and L["1 goal on: /enfocao"] or L["%d goals on: /enfocao"]:format(n))
-        local advice = #ns.Advice_For(ns.MyKey())
-        if advice > 0 then text = text .. " -- " .. L["%d suggestions: /enfocao suggestions"]:format(advice) end
+        local plan = ns.Plan_For(ns.MyKey())
+        if #plan.steps > 0 then
+            text = text .. " -- " .. L["today's plan: %d steps, about %d min (/enfocao today)"]:format(#plan.steps, plan.used)
+        else
+            local advice = #ns.Advice_For(ns.MyKey())
+            if advice > 0 then text = text .. " -- " .. L["%d suggestions: /enfocao suggestions"]:format(advice) end
+        end
         print(("|cffd94fb0Enfocao!!|r v%s -- %s"):format(ns.Version(), text))
     end)
 end
@@ -77,6 +82,6 @@ SlashCmdList.ENFOCAO = function(msg)
                 found = true
             end
         end
-        if not found then ns.Print(L["Usage: /enfocao | new | goals | suggestions | achieved | style | hud | prefs | minimap | about | version"]) end
+        if not found then ns.Print(L["Usage: /enfocao | today | new | goals | suggestions | templates | achieved | style | hud | prefs | minimap | about | version"]) end
     end
 end

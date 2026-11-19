@@ -161,6 +161,19 @@ describe("Translations", function()
                 if o.text then dynamic[#dynamic + 1] = o.text end
             end
         end
+        for _, bg in ipairs(ns.BATTLEGROUNDS) do
+            dynamic[#dynamic + 1] = bg.name
+            for _, name in pairs(bg.factionName) do dynamic[#dynamic + 1] = name end
+        end
+        for _, p in ipairs(ns.ACCOUNT_PROFESSIONS) do
+            dynamic[#dynamic + 1] = p.name
+            dynamic[#dynamic + 1] = p.why
+        end
+        for _, t in ipairs(ns.GOAL_TEMPLATES) do
+            dynamic[#dynamic + 1] = t.name
+            dynamic[#dynamic + 1] = t.text
+        end
+        dynamic[#dynamic + 1] = "Hydraxian Waterlords"
         for _, text in ipairs(dynamic) do
             if not ns.L_ES[text] then missing[#missing + 1] = text end
         end

@@ -5,8 +5,10 @@ them by itself: reach a level, raise a profession, a reputation standing, save g
 or something else ticked by hand (once, daily or weekly). Progress bars, a chat line, a sound and a message in the
 middle of the screen when one is reached, the "Today" window with the playing character's goals. Suggested goals from what is known of the character
 ("te aconsejaría invertir tu tiempo en..."), weighed by the player's style (a short "Your style" form: chill / balanced /
-min-maxer, what they enjoy, how long they play). Planned next (see the maintainer's plan): the daily guide from the
-session time ("today do X to get closer to Y"), alts, templates of compound goals, advisors for PvP and alts. Only WoW Forever for now
+min-maxer, what they enjoy, how long they play). Today's plan: a stretch of the closest goals sized to the session,
+the manual goals to tick and the account's chores (cooldowns, mail), shown in the Today view and the "Today" window.
+Templates of goals that go together ("Ready for Molten Core"). Optional entries for Completao (a quest's chain) and
+Fabrikao (recipes using an item) in a goal's menu. Only WoW Forever for now
 (`## Interface: 16001`). Magenta in the family's colors.
 
 Siblings with the same conventions under `D:\Source\WowAddons\`: `Alterao` (the template this repo was cloned from,
@@ -30,7 +32,13 @@ Siblings with the same conventions under `D:\Source\WowAddons\`: `Alterao` (the 
   reads: C_* first, old global as fallback)
 - `Modules/Settings/Settings.lua` — account-wide settings with defaults (`ns.settings`)
 - `Modules/Data/Character.lua` — what is known of a character, the same shape from the store or live from the game
-  (`ns.GetChar`, `ns.Reputation`, `ns.ItemCount`, `ns.QuestDone`, `ns.Factions`, the character the window shows)
+  (`ns.GetChar`, `ns.Reputation`, `ns.ItemCount`, `ns.QuestDone`, `ns.Factions`, the character the window shows);
+  `Addons.lua` is the only file that names Completao and Fabrikao (`ns.Goals_AddonOptions(goal)`: menu entries)
+- `Modules/Goals/Templates.lua` — sets of goals (`ns.GOAL_TEMPLATES`); only what the character still needs is set,
+  each goal keeps `goal.group` (loaded after `Advice/`: it reuses the attunements and battlegrounds tables)
+- `Modules/Plan/Plan.lua` — today's plan in `EnfocaoDB.plan[key]`: made once per daily reset, sized by the profile's
+  session (45 / 60 / 120 min); a goal step is a stretch from where the goal was (`from`, `amount` in the goal's own
+  units, rough rates per hour); goals newer than the plan (`lastGoal`) join it
 - `Modules/Goals/` — `Types` (each kind: title, position on the way to its target, target, status, validity),
   `Goals` (saved in `EnfocaoDB.goals`; progress from where the character was when set, reached → done + announced,
   manual ticks and their daily / weekly resets, the events and store callbacks that check them)
@@ -40,7 +48,8 @@ Siblings with the same conventions under `D:\Source\WowAddons\`: `Alterao` (the 
   accept / later (3 days) / dismiss in `EnfocaoDB.advice[key]`). Texts the code passes through `L` at run time
   (milestones, ranks, slots, attunements, profile options) are exposed on `ns` for the translations test.
 - `Modules/UI/` — `Widgets` (from Alterao, magenta), `Main` (window, view registry, bar of views, character picker),
-  `Goals` (the Goals and Achieved views), `Suggestions` (the view; asks the style the first time),
+  `Today` (the plan view), `Goals` (the Goals and Achieved views), `Suggestions` (the view; asks the style the first time),
+  `Templates`,
   `ProfileForm` (the "Your style" form), `NewGoal` (the form; shift-click links into its boxes), `Hud` (the "Today"
   window), `Preferences`, `MinimapButton`, `About`
 - `Media/` — art, never edited by hand: `images/art/emblems.ps1` cuts the Gemini pictures in `images/ai/` (the icon:

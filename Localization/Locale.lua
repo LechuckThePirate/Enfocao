@@ -7,7 +7,7 @@ local es = {
     ["no goals yet: /enfocao new"] = "aún no tienes objetivos: /enfocao new",
     ["1 goal on: /enfocao"] = "1 objetivo en marcha: /enfocao",
     ["%d goals on: /enfocao"] = "%d objetivos en marcha: /enfocao",
-    ["Usage: /enfocao | new | goals | suggestions | achieved | style | hud | prefs | minimap | about | version"] =
+    ["Usage: /enfocao | today | new | goals | suggestions | templates | achieved | style | hud | prefs | minimap | about | version"] =
         "Uso: /enfocao | new | goals | suggestions | achieved | style | hud | prefs | minimap | about | version",
     ["%d suggestions: /enfocao suggestions"] = "%d sugerencias: /enfocao suggestions",
 
@@ -53,6 +53,88 @@ local es = {
     ["hands"] = "manos",
     ["back"] = "espalda",
     ["main hand weapon"] = "arma principal",
+
+    -- more advisors: battlegrounds, the epic mount, alts
+    ["You are %d%% of the way to %s with %s: a few matches of %s."] = "Llevas un %d%% del camino hasta %s con %s: unas cuantas partidas de %s.",
+    ["%s opens at level %d: it brings honor, and reputation with %s."] = "%s se abre a nivel %d: da honor, y reputación con %s.",
+    ["Warsong Gulch"] = "Garganta Grito de Guerra",
+    ["Arathi Basin"] = "Cuenca de Arathi",
+    ["Alterac Valley"] = "Valle de Alterac",
+    ["Silverwing Sentinels"] = "Centinelas Ala de Plata",
+    ["Warsong Outriders"] = "Escoltas Grito de Guerra",
+    ["League of Arathor"] = "Liga de Arathor",
+    ["The Defilers"] = "Los Rapiñadores",
+    ["Stormpike Guard"] = "Guardia Pico Tormenta",
+    ["Frostwolf Clan"] = "Clan Lobo Gélido",
+    ["At level 60 the epic mount awaits: about 1000 gold with its riding training. You have %d."] =
+        "A nivel 60 te espera la montura épica: unos 1000 de oro con su entrenamiento. Tienes %d.",
+    ["%s has %d%% of a level in rested experience waiting: a good night to play it."] =
+        "%s tiene un %d%% de nivel en experiencia de descanso esperando: buena noche para jugarlo.",
+    ["An alt with %s"] = "Un alter con %s",
+    ["None of your characters knows %s: an alt with it would %s."] = "Ninguno de tus personajes sabe %s: un alter con ella podría %s.",
+    ["Enchanting"] = "Encantamiento",
+    ["Alchemy"] = "Alquimia",
+    ["Mining"] = "Minería",
+    ["Herbalism"] = "Herboristería",
+    ["disenchant what the others find"] = "desencantar lo que encuentran los demás",
+    ["make potions and flasks for all of them"] = "hacer pociones y frascos para todos",
+    ["bring ore to the smiths and engineers"] = "llevar mineral a los herreros e ingenieros",
+    ["bring herbs to the alchemists"] = "llevar hierbas a los alquimistas",
+
+    -- today's plan
+    ["Your plan for this session: a bit of each goal, sized to the time you usually play."] =
+        "Tu plan para esta sesión: un poco de cada objetivo, a la medida del tiempo que sueles jugar.",
+    ["Towards level %d: %d%% of a level"] = "Hacia el nivel %d: un %d%% de nivel",
+    ["Raise %s by %d points"] = "Subir %s %d puntos",
+    ["%d reputation with %s"] = "%d de reputación con %s",
+    ["Earn %dg (quests, farming, the auction house)"] = "Ganar %do (misiones, farmeo, la casa de subastas)",
+    ["Gather %d more %s"] = "Reunir %d más de %s",
+    ["Work on the quest: %s"] = "Avanzar en la misión: %s",
+    ["%s: %s is ready"] = "%s: %s está listo",
+    ["%s: mail runs out in %s"] = "%s: el correo caduca en %s",
+    ["Today's plan is done. Well played!"] = "Plan de hoy completado. ¡Bien jugado!",
+    ["Step"] = "Paso",
+    ["Time"] = "Tiempo",
+    ["~%d min"] = "~%d min",
+    ["Leave it out of today"] = "Quitarlo del plan de hoy",
+    ["Open the goals"] = "Abrir los objetivos",
+    ["For the goal: %s"] = "Para el objetivo: %s",
+    ["Idea: %s"] = "Idea: %s",
+    ["Click: set it as a goal."] = "Clic: ponerlo como objetivo.",
+    ["New plan"] = "Plan nuevo",
+    ["Nothing planned: set a goal, or accept a suggestion."] = "Nada planeado: ponte un objetivo o acepta una sugerencia.",
+    ["%s: %d of %d steps done, about %d of %d minutes planned."] = "%s: %d de %d pasos hechos, unos %d de %d minutos planeados.",
+    ["today's plan: %d steps, about %d min (/enfocao today)"] = "plan de hoy: %d pasos, unos %d min (/enfocao today)",
+
+    -- templates
+    ["Templates"] = "Plantillas",
+    ["Goals that go together, set in one go: only what this character still needs."] =
+        "Objetivos que van juntos, de una vez: solo lo que a este personaje aún le falta.",
+    ["Template"] = "Plantilla",
+    ["What it sets"] = "Qué pone",
+    ["%s: %d goals set."] = "%s: %d objetivos puestos.",
+    ["Click: set these goals."] = "Clic: poner estos objetivos.",
+    ["No template fits this character right now."] = "Ahora mismo ninguna plantilla le encaja a este personaje.",
+    ["Ready to ride"] = "Listo para montar",
+    ["Level 40, and the gold for the mount and its training."] = "Nivel 40, y el oro para la montura y su entrenamiento.",
+    ["Professions up to date"] = "Profesiones al día",
+    ["Your professions and First Aid as high as your level allows."] = "Tus profesiones y Primeros auxilios tan altos como permite tu nivel.",
+    ["Battleground veteran"] = "Veterano de campos de batalla",
+    ["Honored with the battlegrounds your level opens."] = "Honorable con los campos de batalla que abre tu nivel.",
+    ["Epic mount"] = "Montura épica",
+    ["Level 60, and about 1000 gold for the mount and its training."] = "Nivel 60, y unos 1000 de oro para la montura y su entrenamiento.",
+    ["Ready for Molten Core"] = "Listo para el Núcleo de Magma",
+    ["Level 60, the attunement, and Honored with the Hydraxian Waterlords to douse the runes."] =
+        "Nivel 60, el acceso, y Honorable con los Srs. del Agua de Hydraxis para apagar las runas.",
+    ["Hydraxian Waterlords"] = "Srs. del Agua de Hydraxis",
+    ["Ready for Onyxia"] = "Listo para Onyxia",
+    ["Level 60 and the attunement to her lair."] = "Nivel 60 y el acceso a su guarida.",
+    ["Ready for Blackwing Lair"] = "Listo para la Guarida Alanegra",
+    ["Level 60, the Seal of Ascension and the attunement to the lair."] = "Nivel 60, el Sello de Ascensión y el acceso a la guarida.",
+
+    -- the family's addons
+    ["Show the chain in Completao!!"] = "Ver la cadena en Completao!!",
+    ["Recipes that use it (Fabrikao!!)"] = "Recetas que lo usan (Fabrikao!!)",
 
     -- the Suggestions view
     ["Suggestions"] = "Sugerencias",

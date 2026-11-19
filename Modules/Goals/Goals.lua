@@ -31,14 +31,27 @@ function ns.Goals_For(key, done)
     return list
 end
 
--- A new goal for a character: nil and why when the parameters don't make one.
-function ns.Goals_Add(key, typeKey, p)
+-- What makes two goals the same kind of thing (one level goal at a time, one per profession, faction...): the
+-- suggestions and the templates leave out what a character already goes for.
+function ns.Goals_Signature(goal)
+    local p = goal.p
+    if goal.type == "level" then return "level" end
+    if goal.type == "profession" then return "profession:" .. tostring(p.name) end
+    if goal.type == "reputation" then return "reputation:" .. tostring(p.faction) end
+    if goal.type == "gold" then return "gold" end
+    if goal.type == "quest" then return "quest:" .. tostring(p.quest) end
+    if goal.type == "items" then return "items:" .. tostring(p.item) end
+    return "manual:" .. tostring(p.text)
+end
+
+-- A new goal for a character: nil and why when the parameters don't make one. `group`: the template it came from.
+function ns.Goals_Add(key, typeKey, p, group)
     local def = ns.GOAL_TYPES[typeKey]
     if not def or not ns.GetChar(key) then return nil, L["Unknown character."] end
     p = p or {}
     if not def.valid(p, key) then return nil, L["Check the values: that goal can't be set."] end
     ns.db.nextGoal = (ns.db.nextGoal or 0) + 1
-    local goal = { id = ns.db.nextGoal, char = key, type = typeKey, p = p, created = ns.Now(), done = false }
+    local goal = { id = ns.db.nextGoal, char = key, type = typeKey, p = p, created = ns.Now(), done = false, group = group }
     -- where the character is now: the bar starts there
     if not def.manual then p.start = def.position(goal, key) end
     if typeKey == "quest" then
@@ -155,6 +168,7 @@ end
 function ns.Goals_Init()
     local function changed() ns.Debounce("goals", 1, function()
         ns.Goals_Check()
+        if ns.Plan_Check then ns.Plan_Check() end
         ns.UI_Refresh()
     end) end
     for _, event in ipairs({ "PLAYER_XP_UPDATE", "PLAYER_LEVEL_UP", "PLAYER_MONEY", "BAG_UPDATE_DELAYED", "SKILL_LINES_CHANGED",

@@ -1,7 +1,8 @@
 local ADDON, ns = ...
 local L = ns.L
 
--- The small "Today" window: the playing character's active goals, each with its bar, always at hand. Movable
+-- The small "Today" window: the playing character's plan for today (Plan/Plan.lua), each step with its bar, always
+-- at hand. Movable
 -- (unless locked), shown or hidden from the preferences, the minimap menu or /enfocao hud. A click on its title opens
 -- the main window; right-click for its menu.
 local ICON = "Interface\\AddOns\\" .. ADDON .. "\\Icons\\Enfocao.png"
@@ -30,7 +31,11 @@ local function makeRow(i)
     row.status:SetPoint("RIGHT", row.barBg, "RIGHT", 0, 10)
     row:EnableMouse(true)
     row:SetScript("OnEnter", function(self)
-        if self.goal then ns.UI_ShowTooltip(self, { ns.Goals_Title(self.goal), { self.statusText or "", 1, 1, 1 } }) end
+        if self.step then
+            local lines = { self.step.text }
+            if self.step.goal then lines[#lines + 1] = { L["For the goal: %s"]:format(ns.Goals_Title(self.step.goal)), 1, 1, 1 } end
+            ns.UI_ShowTooltip(self, lines)
+        end
     end)
     row:SetScript("OnLeave", GameTooltip_Hide)
     return row
@@ -67,10 +72,10 @@ local function create()
     hud:SetScript("OnMouseUp", function(self, button)
         if button == "RightButton" then
             hudMenu(self)
-        elseif #ns.Goals_For(ns.MyKey(), false) == 0 then
+        elseif #ns.Plan_For(ns.MyKey()).steps == 0 then
             ns.UI_Show("suggestions")
         else
-            ns.UI_Toggle()
+            ns.UI_Show("today")
         end
     end)
 
@@ -92,31 +97,32 @@ function ns.Hud_Refresh()
         return
     end
     if not hud then create() end
-    local goals = ns.Goals_For(ns.MyKey(), false)
+    local plan = ns.Plan_For(ns.MyKey())
+    local steps = plan.steps
     local max = ns.settings.hudMax or 5
-    local shown = math.min(#goals, max)
+    local shown = math.min(#steps, max)
     for i = 1, shown do
         local row = hud.rows[i] or makeRow(i)
         hud.rows[i] = row
-        local g = goals[i]
-        local progress = ns.Goals_Progress(g)
-        row.goal, row.statusText = g, progress.status
-        row.icon:SetTexture(ns.Goals_Icon(g))
-        row.title:SetText(ns.Goals_Title(g))
-        row.status:SetText(("%d%%"):format(math.floor(progress.fraction * 100)))
-        row.bar:SetWidth(math.max(1, (WIDTH - 40) * progress.fraction))
+        local step = steps[i]
+        row.step = step
+        row.icon:SetTexture(step.icon)
+        row.title:SetText(step.done and ("|cff99ff99" .. step.text .. "|r") or step.text)
+        row.status:SetText(step.done and L["done"] or ("%d%%"):format(math.floor(step.fraction * 100)))
+        row.bar:SetWidth(math.max(1, (WIDTH - 40) * step.fraction))
         row:Show()
     end
     for i = shown + 1, #hud.rows do hud.rows[i]:Hide() end
-    hud.empty:SetShown(#goals == 0)
-    if #goals == 0 then
+    hud.empty:SetShown(#steps == 0)
+    if #steps == 0 then
         local advice = #ns.Advice_For(ns.MyKey())
         hud.empty:SetText(advice > 0 and L["No goals: I have %d suggestions for you (click)."]:format(advice)
             or L["No goals: right-click to set one."])
     end
-    local more = #goals - shown
-    hud.title:SetText(more > 0 and (L["Today"] .. " |cff999999" .. L["(+%d more)"]:format(more) .. "|r") or L["Today"])
-    hud:SetHeight(32 + math.max(1, shown) * ROW_H + (#goals == 0 and 4 or 0))
+    local more = #steps - shown
+    local title = L["Today"] .. (#steps > 0 and (" |cffffffff" .. plan.done .. "/" .. #steps .. "|r") or "")
+    hud.title:SetText(more > 0 and (title .. " |cff999999" .. L["(+%d more)"]:format(more) .. "|r") or title)
+    hud:SetHeight(32 + math.max(1, shown) * ROW_H + (#steps == 0 and 4 or 0))
     hud:Show()
 end
 

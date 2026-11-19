@@ -23,6 +23,7 @@ local function goalMenu(goal, anchor)
     if goal.done then
         options[#options + 1] = { name = L["Back to the active goals"], run = function() ns.Goals_Reopen(goal.id) end }
     end
+    for _, opt in ipairs(ns.Goals_AddonOptions(goal)) do options[#options + 1] = opt end
     options[#options + 1] = { name = L["Remove this goal"], color = { 1, 0.4, 0.4 }, run = function() ns.Goals_Remove(goal.id) end }
     ns.PopupMenu(anchor, options, function(opt)
         opt.run()
@@ -30,12 +31,19 @@ local function goalMenu(goal, anchor)
     end, 200, "right")
 end
 
+-- A goal's title, with the template it came from.
+local function titleOf(goal)
+    local template = goal.group and ns.Template_Get(goal.group)
+    if not template then return ns.Goals_Title(goal) end
+    return ns.Goals_Title(goal) .. " |cff999999· " .. L[template.name] .. "|r"
+end
+
 local function activeRow(goal)
     local progress = ns.Goals_Progress(goal)
     local color = progress.known and { 1, 1, 1 } or { 0.55, 0.55, 0.55 }
     return {
         cells = {
-            { text = ns.Goals_Title(goal), icon = ns.Goals_Icon(goal), color = { 1, 0.9, 0.6 } },
+            { text = titleOf(goal), icon = ns.Goals_Icon(goal), color = { 1, 0.9, 0.6 } },
             { text = progress.status, color = color, bar = progress.fraction, barColor = ns.ACCENT },
             { text = ns.FormatAgo(goal.created), color = { 0.7, 0.7, 0.7 } },
         },

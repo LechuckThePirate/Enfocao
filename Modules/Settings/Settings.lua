@@ -6,9 +6,9 @@ ns.DEFAULTS = {
     quiet = false,          -- no chat line at login
     scale = 1,              -- the window's size
     artAlpha = 0.22,        -- the picture behind the window's views
-    hud = true,             -- the small "Today" window with the playing character's goals
+    hud = true,             -- the small "Today" window with the playing character's plan for today
     hudLocked = false,      -- it can't be dragged
-    hudMax = 5,             -- how many goals it lists
+    hudMax = 5,             -- how many steps it lists
     sound = true,           -- a sound when a goal is reached
     centerMessage = true,   -- and a message in the middle of the screen
 }

@@ -51,7 +51,9 @@ local function draw(content)
         if s then
             local goal = { type = s.goal.type, p = s.goal.p }
             row.icon:SetTexture(ns.Goals_Icon(goal))
-            row.title:SetText(ns.Goals_Title(goal))
+            local title = ns.Goals_Title(goal)
+            if s.key and s.key ~= key then title = title .. " (" .. ns.ColorName(ns.GetChar(s.key)) .. ")" end
+            row.title:SetText(title)
             row.why:SetText(s.why)
             row.score:SetWidth(math.max(4, 4 * s.score))
             row.score:SetColorTexture(ns.ACCENT[1], ns.ACCENT[2], ns.ACCENT[3], 0.7)
