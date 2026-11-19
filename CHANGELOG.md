@@ -19,4 +19,4 @@ mail about to run out). In the new Today view and in the "Today" window; a new p
 
 Templates: goals that go together, set in one go (ready to ride, professions up to date, battleground veteran, epic
 mount, ready for Molten Core, Onyxia, Blackwing Lair). With Completao!! or Fabrikao!! installed, a goal's menu opens
-a quest's chain or the recipes that use an item.
+a quest's chain, how to craft an item (Fabrikao 0.9 or later) or the recipes that use it.

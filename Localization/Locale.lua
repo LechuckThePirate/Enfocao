@@ -135,6 +135,7 @@ local es = {
     -- the family's addons
     ["Show the chain in Completao!!"] = "Ver la cadena en Completao!!",
     ["Recipes that use it (Fabrikao!!)"] = "Recetas que lo usan (Fabrikao!!)",
+    ["How to craft it (Fabrikao!!)"] = "Cómo fabricarlo (Fabrikao!!)",
 
     -- the Suggestions view
     ["Suggestions"] = "Sugerencias",

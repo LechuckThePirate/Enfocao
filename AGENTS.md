@@ -8,7 +8,7 @@ middle of the screen when one is reached, the "Today" window with the playing ch
 min-maxer, what they enjoy, how long they play). Today's plan: a stretch of the closest goals sized to the session,
 the manual goals to tick and the account's chores (cooldowns, mail), shown in the Today view and the "Today" window.
 Templates of goals that go together ("Ready for Molten Core"). Optional entries for Completao (a quest's chain) and
-Fabrikao (recipes using an item) in a goal's menu. Only WoW Forever for now
+Fabrikao (how to craft an item, the recipes using it) in a goal's menu. Only WoW Forever for now
 (`## Interface: 16001`). Magenta in the family's colors.
 
 Siblings with the same conventions under `D:\Source\WowAddons\`: `Alterao` (the template this repo was cloned from,

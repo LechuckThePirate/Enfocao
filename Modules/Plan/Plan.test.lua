@@ -198,4 +198,21 @@ describe("the family's addons", function()
         assert.are.equal(7848, shown)
         assert.are.equal(12360, recipes)
     end)
+
+    it("offers how to craft an item when Fabrikao knows a recipe for it (and has the function)", function()
+        start()
+        local items = ns.Goals_Add(ns.MyKey(), "items", { item = 12360, count = 5 })
+        local crafted
+        _G.FabrikaoAPI = { version = 1, ShowRecipesUsing = function() end } -- an older Fabrikao
+        assert.are.equal(1, #ns.Goals_AddonOptions(items))
+        _G.FabrikaoAPI.HasRecipeFor = function(id) return id == 12360 end
+        _G.FabrikaoAPI.ShowRecipeFor = function(id) crafted = id end
+        local options = ns.Goals_AddonOptions(items)
+        assert.are.equal(2, #options)
+        assert.matches("How to craft it", options[1].name)
+        options[1].run()
+        assert.are.equal(12360, crafted)
+        _G.FabrikaoAPI.HasRecipeFor = function() return false end -- nothing makes it
+        assert.are.equal(1, #ns.Goals_AddonOptions(items))
+    end)
 end)
