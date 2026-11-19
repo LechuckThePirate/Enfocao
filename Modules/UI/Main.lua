@@ -12,8 +12,14 @@ local MEDIA = "Interface\\AddOns\\" .. ADDON .. "\\Media\\"
 local views, navButtons = {}, {}
 local frame, current, ticker
 
+-- Views are listed by their `order` (then as registered).
 function ns.UI_RegisterView(view)
     views[#views + 1] = view
+    view.seq = #views
+    table.sort(views, function(a, b)
+        if (a.order or 50) ~= (b.order or 50) then return (a.order or 50) < (b.order or 50) end
+        return a.seq < b.seq
+    end)
 end
 
 function ns.UI_Views() return views end

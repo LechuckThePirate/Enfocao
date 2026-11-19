@@ -149,6 +149,21 @@ describe("Translations", function()
         for _, name in ipairs({ "Hated", "Hostile", "Unfriendly", "Neutral", "Friendly", "Honored", "Revered", "Exalted" }) do
             if not ns.L_ES[name] then missing[#missing + 1] = name end
         end
+        -- the texts the code passes through L at run time
+        local dynamic = {}
+        for _, m in ipairs(ns.MILESTONES) do dynamic[#dynamic + 1] = m.why end
+        for _, r in pairs(ns.NEXT_RANK) do dynamic[#dynamic + 1] = r.name end
+        for _, s in pairs(ns.SLOT_NAMES) do dynamic[#dynamic + 1] = s end
+        for _, a in ipairs(ns.ATTUNEMENT_GOALS) do dynamic[#dynamic + 1] = a.name end
+        for _, list in ipairs({ ns.PROFILE_STYLES, ns.PROFILE_LIKES, ns.PROFILE_SESSIONS }) do
+            for _, o in ipairs(list) do
+                dynamic[#dynamic + 1] = o.name
+                if o.text then dynamic[#dynamic + 1] = o.text end
+            end
+        end
+        for _, text in ipairs(dynamic) do
+            if not ns.L_ES[text] then missing[#missing + 1] = text end
+        end
         assert.are.same({}, missing)
     end)
 end)

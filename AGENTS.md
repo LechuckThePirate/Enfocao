@@ -3,9 +3,10 @@
 World of Warcraft addon: a personal coach. **Stop planning. Start playing.** The player sets goals and Enfocao follows
 them by itself: reach a level, raise a profession, a reputation standing, save gold, gather items, complete a quest,
 or something else ticked by hand (once, daily or weekly). Progress bars, a chat line, a sound and a message in the
-middle of the screen when one is reached, the "Today" window with the playing character's goals. Planned next
-(see the maintainer's plan): suggested goals from what is known of the character ("te aconsejaría invertir tu tiempo
-en...") and the daily guide ("today do X to get closer to Y"), templates of compound goals. Only WoW Forever for now
+middle of the screen when one is reached, the "Today" window with the playing character's goals. Suggested goals from what is known of the character
+("te aconsejaría invertir tu tiempo en..."), weighed by the player's style (a short "Your style" form: chill / balanced /
+min-maxer, what they enjoy, how long they play). Planned next (see the maintainer's plan): the daily guide from the
+session time ("today do X to get closer to Y"), alts, templates of compound goals, advisors for PvP and alts. Only WoW Forever for now
 (`## Interface: 16001`). Magenta in the family's colors.
 
 Siblings with the same conventions under `D:\Source\WowAddons\`: `Alterao` (the template this repo was cloned from,
@@ -33,8 +34,14 @@ Siblings with the same conventions under `D:\Source\WowAddons\`: `Alterao` (the 
 - `Modules/Goals/` — `Types` (each kind: title, position on the way to its target, target, status, validity),
   `Goals` (saved in `EnfocaoDB.goals`; progress from where the character was when set, reached → done + announced,
   manual ticks and their daily / weekly resets, the events and store callbacks that check them)
+- `Modules/Advice/` — `Profile` (the player's style in `EnfocaoDB.profile`: style, likes, session; `ns.Profile_Weight(tags)`
+  turns it into a factor), `Advisors` (each advisor reads a character and returns suggestions: id, goal, why, score,
+  tags; `ns.Advice_For` drops kinds already set as goals, dismissed and postponed ones, weighs by the profile, sorts;
+  accept / later (3 days) / dismiss in `EnfocaoDB.advice[key]`). Texts the code passes through `L` at run time
+  (milestones, ranks, slots, attunements, profile options) are exposed on `ns` for the translations test.
 - `Modules/UI/` — `Widgets` (from Alterao, magenta), `Main` (window, view registry, bar of views, character picker),
-  `Goals` (the Goals and Achieved views), `NewGoal` (the form; shift-click links into its boxes), `Hud` (the "Today"
+  `Goals` (the Goals and Achieved views), `Suggestions` (the view; asks the style the first time),
+  `ProfileForm` (the "Your style" form), `NewGoal` (the form; shift-click links into its boxes), `Hud` (the "Today"
   window), `Preferences`, `MinimapButton`, `About`
 - `Media/` — art, never edited by hand: `images/art/emblems.ps1` cuts the Gemini pictures in `images/ai/` (the icon:
   `Icons/Enfocao.png`, `images/curseforge-icon.png`, and the views' stand-in `Emblem/Icon/Back_main.png`; a view's own

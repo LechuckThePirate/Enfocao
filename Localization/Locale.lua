@@ -7,8 +7,95 @@ local es = {
     ["no goals yet: /enfocao new"] = "aún no tienes objetivos: /enfocao new",
     ["1 goal on: /enfocao"] = "1 objetivo en marcha: /enfocao",
     ["%d goals on: /enfocao"] = "%d objetivos en marcha: /enfocao",
-    ["Usage: /enfocao | new | goals | achieved | hud | prefs | minimap | about | version"] =
-        "Uso: /enfocao | new | goals | achieved | hud | prefs | minimap | about | version",
+    ["Usage: /enfocao | new | goals | suggestions | achieved | style | hud | prefs | minimap | about | version"] =
+        "Uso: /enfocao | new | goals | suggestions | achieved | style | hud | prefs | minimap | about | version",
+    ["%d suggestions: /enfocao suggestions"] = "%d sugerencias: /enfocao suggestions",
+
+    -- suggestions: the advisors' reasons
+    ["Level %d brings %s. You are %d levels away."] = "El nivel %d trae %s. Te faltan %d niveles.",
+    ["talents, and your class's quests"] = "talentos y las misiones de tu clase",
+    ["new spells and the dungeons of the middle levels"] = "hechizos nuevos y las mazmorras de nivel medio",
+    ["more talents, and five levels from thinking of your mount"] = "más talentos, y quedarte a cinco niveles de la montura",
+    ["your mount, and better armor for many classes"] = "tu montura, y mejor armadura para muchas clases",
+    ["the dungeons of Blackrock and the last zones"] = "las mazmorras de Roca Negra y las últimas zonas",
+    ["the top level: raids, attunements and the end game"] = "el nivel máximo: bandas, accesos y el final del juego",
+    ["You have %d%% of a level in rested experience: every kill is worth double. A good time to level."] =
+        "Tienes un %d%% de nivel en experiencia de descanso: cada muerte vale doble. Buen momento para subir.",
+    ["At level 40 you can ride: the mount and the riding skill cost about 100 gold. You have %d."] =
+        "A nivel 40 podrás montar: la montura y la equitación cuestan unos 100 de oro. Tienes %d.",
+    ["Your %s is at the top of its rank (%d/%d): learn %s from your trainer and take it to %d."] =
+        "Tu %s está en el tope de su rango (%d/%d): aprende %s en tu instructor y súbela a %d.",
+    ["Journeyman"] = "Oficial",
+    ["Expert"] = "Experto",
+    ["Artisan"] = "Artesano",
+    ["Your %s is at %d: at your level it could be at %d."] = "Tu %s está en %d: a tu nivel podría estar en %d.",
+    ["Learn First Aid"] = "Aprender Primeros auxilios",
+    ["First Aid costs almost nothing and heals you between fights: every class wants it."] =
+        "Primeros auxilios casi no cuesta nada y te cura entre combates: le viene bien a cualquier clase.",
+    ["You are %d%% of the way to %s with %s."] = "Llevas un %d%% del camino hasta %s con %s.",
+    ["At level %d you can start it: one step closer to the end game."] = "Desde el nivel %d puedes empezarlo: un paso más hacia el final del juego.",
+    ["Shadowforge Key (Blackrock Depths)"] = "Llave de Forjatiniebla (Profundidades de Roca Negra)",
+    ["Molten Core attunement"] = "Acceso al Núcleo de Magma",
+    ["Skeleton Key (Scholomance)"] = "Llave esqueleto (Scholomance)",
+    ["Onyxia's Lair attunement"] = "Acceso a la Guarida de Onyxia",
+    ["Seal of Ascension (Upper Blackrock Spire)"] = "Sello de Ascensión (Cumbre de Roca Negra superior)",
+    ["Blackwing Lair attunement"] = "Acceso a la Guarida Alanegra",
+    ["Better %s"] = "Mejorar: %s",
+    ["Your %s is item level %d; the rest of your gear is around %d."] =
+        "Tu pieza de %s es de nivel de objeto %d; el resto de tu equipo ronda el %d.",
+    ["head"] = "cabeza",
+    ["shoulders"] = "hombros",
+    ["chest"] = "pecho",
+    ["waist"] = "cintura",
+    ["legs"] = "piernas",
+    ["feet"] = "pies",
+    ["wrists"] = "muñecas",
+    ["hands"] = "manos",
+    ["back"] = "espalda",
+    ["main hand weapon"] = "arma principal",
+
+    -- the Suggestions view
+    ["Suggestions"] = "Sugerencias",
+    ["What I'd advise you to spend your time on, from what I know of this character and your style."] =
+        "En qué te aconsejaría invertir tu tiempo, según lo que sé de este personaje y de tu estilo.",
+    ["Accept"] = "Aceptar",
+    ["Later"] = "Ahora no",
+    ["Dismiss: don't suggest it again"] = "Descartar: no volver a sugerirlo",
+    ["New goal: %s"] = "Nuevo objetivo: %s",
+    ["Scroll for %d more"] = "Rueda del ratón para %d más",
+    ["Nothing to suggest right now: you're on track."] = "Nada que sugerir ahora mismo: vas bien encaminado.",
+    ["No goals: I have %d suggestions for you (click)."] = "Sin objetivos: tengo %d sugerencias para ti (clic).",
+
+    -- your style
+    ["Your style"] = "Tu estilo",
+    ["Your style: %s"] = "Tu estilo: %s",
+    ["not set yet"] = "sin definir",
+    ["Tell me how you like to play and I'll tune my suggestions. You can change it whenever you want."] =
+        "Cuéntame cómo te gusta jugar y ajustaré mis sugerencias. Puedes cambiarlo cuando quieras.",
+    ["How do you play?"] = "¿Cómo juegas?",
+    ["What do you enjoy? (any)"] = "¿Qué te gusta? (las que quieras)",
+    ["How long do you usually play?"] = "¿Cuánto sueles jugar?",
+    ["Your time per session will shape the daily plan, coming in a next version."] =
+        "Tu tiempo por sesión dará forma al plan del día, que llegará en una próxima versión.",
+    ["Save"] = "Guardar",
+    ["Chill"] = "Tranquilo",
+    ["I play to have a good time, no rush"] = "Juego para pasarlo bien, sin prisas",
+    ["Balanced"] = "Equilibrado",
+    ["A bit of everything, at my own pace"] = "Un poco de todo, a mi ritmo",
+    ["Min-maxer"] = "Min-maxer",
+    ["I want to be as efficient as possible"] = "Quiero ser lo más eficiente posible",
+    ["Questing and leveling"] = "Misiones y subir de nivel",
+    ["Dungeons"] = "Mazmorras",
+    ["Raids"] = "Bandas",
+    ["PvP"] = "JcJ",
+    ["Professions"] = "Profesiones",
+    ["Making gold"] = "Hacer oro",
+    ["Reputations"] = "Reputaciones",
+    ["Playing alts"] = "Jugar con alters",
+    ["Collecting"] = "Coleccionar",
+    ["Short sessions (under an hour)"] = "Ratos cortos (menos de una hora)",
+    ["About an hour"] = "Más o menos una hora",
+    ["Long sessions"] = "Sesiones largas",
 
     -- time
     ["now"] = "ahora",

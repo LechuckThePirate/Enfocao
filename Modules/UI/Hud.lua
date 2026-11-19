@@ -65,7 +65,13 @@ local function create()
         ns.settings.hudPos = { point, relPoint, x, y }
     end)
     hud:SetScript("OnMouseUp", function(self, button)
-        if button == "RightButton" then hudMenu(self) else ns.UI_Toggle() end
+        if button == "RightButton" then
+            hudMenu(self)
+        elseif #ns.Goals_For(ns.MyKey(), false) == 0 then
+            ns.UI_Show("suggestions")
+        else
+            ns.UI_Toggle()
+        end
     end)
 
     local icon = hud:CreateTexture(nil, "ARTWORK")
@@ -103,6 +109,11 @@ function ns.Hud_Refresh()
     end
     for i = shown + 1, #hud.rows do hud.rows[i]:Hide() end
     hud.empty:SetShown(#goals == 0)
+    if #goals == 0 then
+        local advice = #ns.Advice_For(ns.MyKey())
+        hud.empty:SetText(advice > 0 and L["No goals: I have %d suggestions for you (click)."]:format(advice)
+            or L["No goals: right-click to set one."])
+    end
     local more = #goals - shown
     hud.title:SetText(more > 0 and (L["Today"] .. " |cff999999" .. L["(+%d more)"]:format(more) .. "|r") or L["Today"])
     hud:SetHeight(32 + math.max(1, shown) * ROW_H + (#goals == 0 and 4 or 0))

@@ -46,7 +46,7 @@ function ns.LiveRecord()
                 local ok, name, icon, rank, maxRank, _, _, skillLine = pcall(GetProfessionInfo, index)
                 if ok and name then
                     professions[#professions + 1] = { name = name, icon = icon, rank = ns.Num(rank), max = ns.Num(maxRank),
-                        skillLine = skillLine, primary = slot <= 2 }
+                        skillLine = skillLine, primary = slot <= 2, slot = slot }
                 end
             end
         end
@@ -155,6 +155,49 @@ end
 function ns.ItemIcon(itemID)
     local _, icon = ns.ItemInstant(itemID)
     return icon or 134400
+end
+
+-- The rested experience as a share of the level's bar (0..1.5): live for the playing character, worked out to now
+-- by the store for the others. nil at max level or when unknown.
+function ns.RestedShare(key)
+    if ns.IsMe(key) then
+        local xpMax = ns.Num(UnitXPMax("player"))
+        if not xpMax or xpMax <= 0 or (ns.Num(UnitLevel("player")) or 0) >= MAX_LEVEL then return nil end
+        return (ns.Num(GetXPExhaustion and GetXPExhaustion()) or 0) / xpMax
+    end
+    local store = ns.Store()
+    if not store then return nil end
+    local _, share = store.Rested(key)
+    return share
+end
+
+-- What a character wears, slot -> item link: live for the playing one, the store's saved links for the others.
+function ns.Gear(key)
+    if ns.IsMe(key) and GetInventoryItemLink then
+        local gear = {}
+        for slot = 1, 19 do
+            local link = GetInventoryItemLink("player", slot)
+            if type(link) == "string" and not ns.IsSecret(link) then gear[slot] = link end
+        end
+        return gear
+    end
+    local rec = ns.GetChar(key)
+    return rec and rec.gear or nil
+end
+
+-- An item's level, from its link (the detailed one when the game has it).
+function ns.ItemLevel(link)
+    if not link then return nil end
+    if C_Item and C_Item.GetDetailedItemLevelInfo then
+        local ok, level = pcall(C_Item.GetDetailedItemLevelInfo, link)
+        if ok and ns.Num(level) and level > 0 then return level end
+    end
+    local f = (C_Item and C_Item.GetItemInfo) or GetItemInfo
+    if f then
+        local ok, _, _, _, level = pcall(f, link)
+        if ok and ns.Num(level) and level > 0 then return level end
+    end
+    return nil
 end
 
 -- The account's gold: every character the store knows, or the playing one.

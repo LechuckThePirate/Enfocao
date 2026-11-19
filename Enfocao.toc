@@ -20,9 +20,13 @@ Modules\Settings\Settings.lua
 Modules\Data\Character.lua
 Modules\Goals\Types.lua
 Modules\Goals\Goals.lua
+Modules\Advice\Profile.lua
+Modules\Advice\Advisors.lua
 Modules\UI\Widgets.lua
 Modules\UI\Main.lua
 Modules\UI\Goals.lua
+Modules\UI\Suggestions.lua
+Modules\UI\ProfileForm.lua
 Modules\UI\NewGoal.lua
 Modules\UI\Hud.lua
 Modules\UI\Preferences.lua

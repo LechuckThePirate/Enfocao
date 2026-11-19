@@ -75,6 +75,7 @@ end
 ns.UI_RegisterView({
     key = "goals",
     emblem = "goals",
+    order = 10,
     title = L["Goals"],
     text = L["What this character is going for, and how far it is. They update by themselves."],
     build = function(content)
@@ -99,6 +100,7 @@ ns.UI_RegisterView({
 ns.UI_RegisterView({
     key = "achieved",
     emblem = "achieved",
+    order = 30,
     title = L["Achieved"],
     text = L["Every goal reached, and how long it took."],
     build = function(content)
